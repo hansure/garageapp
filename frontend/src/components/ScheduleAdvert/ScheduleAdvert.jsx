@@ -30,7 +30,7 @@ function ScheduleAdvert() {
                     alignItems:'center',
                     justifyContent:'center',
                     mx:'8px'
-                }}>1800.456.7890</Typography>
+                }}>+251767418077/+251956778899</Typography>
             <Button variant='contained' sx={{
                 mx:'5px'
             }}>

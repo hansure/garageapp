@@ -2,10 +2,13 @@ import { Box, Button, Paper, Stack, TextField, Typography } from '@mui/material'
 import React, {useContext,useEffect, useState} from 'react'
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import { loginEmployeeService } from '../../services/login.service.js'
+import { useAuth } from "../../Contexts/AuthContext"
 
 const LoginForm = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    console.log(useAuth())
+    const {isLogged, setIsLogged, employee} = useAuth()
     const [employee_email, setEmail] = useState('')
     const [employee_password, setPassword] = useState('')
     const [emailError, setEmailError] = useState(false)
@@ -45,6 +48,7 @@ const LoginForm = () => {
             employee_email,
             employee_password
         }
+        console.log("This is form data!")
         console.log(formData)
         //Pass the form data to the service
         const loginEmployee = loginEmployeeService(formData)
@@ -55,6 +59,7 @@ const LoginForm = () => {
                 if(res.data.employee_token){
                     console.log(res.data)
                     localStorage.setItem("employee", JSON.stringify(res.data))
+                    setIsLogged(true)
                 }
                 console.log(location)
                 if(location.pathname === '/login'){

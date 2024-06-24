@@ -14,9 +14,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import logo from '../../assets/images/logo.png'
+import logo from '../../assets/images/Logo.jpg'
 import { Link } from "react-router-dom";
 import { useAuth } from "../../Contexts/AuthContext"
+import {logOutEmployeeService} from '../../services/login.service'
 
 const drawerWidth = 240;
 const navItems = [
@@ -24,7 +25,7 @@ const navItems = [
   { text: "About Us", path: "/about-us" },
   { text: "Services", path: "/Services" },
   { text: "Contact Us", path: "/contact-us" },
-  { text: "Admin", path: "/admin" },
+  { text: "Admin", path: "/admin/dashboard" },
 ];
 
 function Header(props) {
@@ -37,9 +38,13 @@ function Header(props) {
     setMobileOpen((prevState) => !prevState);
   };
 
+  const logOut = () =>{
+    logOutEmployeeService()
+    setIsLogged(false)
+  }
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <img src="logo.png" alt="logo"/>
+      {/* <img src="logo.jpg" alt="logo"/> */}
       <Divider />
       <List>
         {navItems && navItems.map((item) => (
@@ -53,12 +58,20 @@ function Header(props) {
           <Button color="primary" variant="contained" sx={{
             marginTop:'3px'
           }}>
+            {
+              isLogged ? (<Link to="/" onClick = {logOut} style={{
+              color:'white',
+              textDecoration:'none'
+            }}>
+              Logout
+            </Link>) : (
             <Link to="/login" style={{
               color:'white',
               textDecoration:'none'
             }}>
               Login
-            </Link>
+            </Link>)
+            }
           </Button>
       </List>
     </Box>
@@ -98,12 +111,20 @@ function Header(props) {
             marginLeft:'5px',
             display:{xs:'none', md:'block'}
           }}>
+            {
+              isLogged ? (<Link to="/" onClick = {logOut} style={{
+              color:'white',
+              textDecoration:'none'
+            }}>
+              Logout
+            </Link>) : (
             <Link to="/login" style={{
               color:'white',
               textDecoration:'none'
             }}>
               Login
-            </Link>
+            </Link>)
+            }
         </Button>
         </Toolbar>
       </AppBar>

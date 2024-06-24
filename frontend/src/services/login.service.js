@@ -5,6 +5,9 @@ export const loginEmployeeService = async (formData) => {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(formData)
     }
-    const response = await fetch(`${api_url}/api/employee/login`, requestOptions)
+    const response = await fetch("http://localhost:5000/api/employee/login", requestOptions)
     return response
+}
+export const logOutEmployeeService = async () => {
+    localStorage.removeItem("employee")
 }

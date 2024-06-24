@@ -1,7 +1,7 @@
 import { Stack, Typography, Button, Box, Divider, Grid, Container } from '@mui/material'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import React from 'react'
-import addService from '../../assets/images/addService.jpg'
+import addService from '../../assets/images/service.jpg'
 import icon1 from '../../assets/template_assets/images/icons/icon1.png'
 
 const addationalService = [

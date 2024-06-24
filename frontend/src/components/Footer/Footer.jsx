@@ -25,7 +25,7 @@ import { Box } from "@mui/material";
               About Us
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              We are XYZ company, dedicated to providing the best service to our
+              We are Garage company, dedicated to providing the best service to our
               customers.
             </Typography>
           </Grid>
@@ -34,13 +34,13 @@ import { Box } from "@mui/material";
               Contact Us
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              123 Main Street, Anytown, USA
+              king george Main Street, Anytown, AA
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Email: info@example.com
+              Email: garage@gmail.com
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Phone: +1 234 567 8901
+              Phone: +251767408099
             </Typography>
           </Grid>
           <Grid item xs={12} sm={4}>
