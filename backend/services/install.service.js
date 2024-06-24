@@ -1,13 +1,9 @@
-//Import query function from the db.config.js file
-import {query} from "../config/db.config.js";
-//Importing fs module
-import * as fs from 'fs';
-import path, { resolve } from 'path';
-import { fileURLToPath } from 'url';
-const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
-const __dirname = path.dirname(__filename); // get the name of the directory
-//Write a function to create the database tables
-export async function installService() {
+// Import the query function from the db.config.js file 
+const conn = require("../config/db.config");
+// Import the fs module to read our sql file  
+const fs = require('fs');
+// Write a function to create the database tables  
+async function install() {
   // Create a variable to hold the path to the sql file  
   const queryfile = __dirname + '/sql/initial-queries.sql';
   // console.log(queryfile);
@@ -17,26 +13,21 @@ export async function installService() {
   let templine = '';
   // Read the sql file 
   const lines = await fs.readFileSync(queryfile, 'utf-8').split('\n');
-  console.log(lines, '\n')
   // Create a promise to handle the asynchronous reading of the file and storing of the queries in the variables  
   const executed = await new Promise((resolve, reject) => {
     // Iterate over all lines
     lines.forEach((line) => {
       if (line.trim().startsWith('--') || line.trim() === '') {
         // Skip if it's a comment or empty line
-        // console.log(line)
         return;
       }
       templine += line;
-    //   console.log(templine, '\n')
       if (line.trim().endsWith(';')) {
         // If it has a semicolon at the end, it's the end of the query
         // Prepare the individual query 
         const sqlQuery = templine.trim();
-        // console.log(sqlQuery)
         // Add query to the list of queries 
         queries.push(sqlQuery);
-        // console.log(queries)
         templine = '';
       }
     });
@@ -44,12 +35,11 @@ export async function installService() {
   });
   //Loop through the queries and execute them one by one asynchronously  
   for (let i = 0; i < queries.length; i++) {
-    // console.log(queries)
     try {
-      const result = await query(queries[i]);
+      const result = await conn.query(queries[i]);
       console.log("Table created");
     } catch (err) {
-    //   console.log("Err Occurred - Table not created");
+      // console.log("Err Occurred - Table not created");
       finalMessage.message = "Not all tables are created";
     }
   }
@@ -63,3 +53,5 @@ export async function installService() {
   // Return the final message
   return finalMessage;
 }
+// Export the install function for use in the controller
+module.exports = { install };
