@@ -1,4 +1,4 @@
-//Import sanitize to prevent XSS
+//Import sanitize to prevent XSS   Password: szmUItWUaz
 import sanitize from 'sanitize'
 //Importing dotenv config
 import 'dotenv/config'
@@ -7,7 +7,7 @@ import express from 'express'
 import cors from 'cors'
 import router from './routes/index.js'
 import './config/db.config.js'
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 10000
 
 const corsOptions = {
     origin: process.env.FRONTEND_URL,
