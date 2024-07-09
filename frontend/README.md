@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+Garage App
+Overview
+The Garage App is designed to manage the operations of a garage, including employee management, customer management, service tracking, and order processing. This README file provides an overview of the navigation structure and key pages within the app.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Navigation Links
+Root Level Public Pages
+Home Page: /
+About Us Page: /about
+Services Page: /services
+Contact Us Page: /contact
+Login Page: /login
+Order Details: /order/{orderHash}
+Admin (Login Required)
+Admin Dashboard: /admin
+Employees: /admin/employees
+Add Employee: /admin/add-employee
+Edit Employee: /admin/employee/edit/:id
+Customers: /admin/customers
+Add Customer: /admin/add-customer
+Edit Customer: /admin/customer/edit/:id
+Customer Details: /admin/customer/{customerId}
+Add Vehicle: /admin/customer/{customerId} (conditionally displayed on the customer details page)
+Orders: /admin/orders
+Add Order: /admin/order
+Edit Order: /admin/order/{orderHash}/edit
+Services: /admin/services
+Add Service: /admin/add-service
+Admin/Private Pages with Explanations
+Admin Dashboard: /admin
+Displays a list of internal pages for easier navigation.
+Employees: /admin/employees
+Shows a list of all added employees.
+Add Employee: /admin/add-employee
+Allows for adding a new employee.
+Edit Employee: /admin/employee/edit/:id
+Enables editing of an existing employee.
+Customers: /admin/customers
+Displays a list of all added customers.
+Add Customer: /admin/add-customer
+Allows for adding a new customer.
+Edit Customer: /admin/customer/edit/:id
+Enables editing of an existing customer.
+Orders: /admin/orders
+Shows a list of all added orders.
+Add Order: /admin/order
+Allows for adding a new order.
+Edit Order: /admin/order/{orderHash}/edit
+Enables updating the status of an existing order.
+Order Details: /admin/order/{orderHash}
+Displays the details of an existing order. Customers can also use this page to check the status of their order.
+Contributing
+Contributions are welcome! Please follow these steps to contribute:
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Fork the repository.
+Create a new branch for your feature or bug fix.
+Commit your changes.
+Push to your branch.
+Create a pull request with a detailed description of the changes.
