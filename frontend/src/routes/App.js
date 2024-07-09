@@ -19,6 +19,7 @@ import ServiceManage from '../pages/admin/ServiceManage';
 import AddCustomer from '../pages/admin/AddCustomer'
 import MySchedule from '../pages/MySchedule';
 import Orders from '../pages/admin/Orders/Orders';
+import NewOrder from '../pages/admin/Orders/NewOrder'
 import PrivateAuthRoute from '../components/Auth/PrivateAuthRoute'
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
           <Route exact path='/admin/services' element={<PrivateAuthRoute roles={[1, 2,3]}><ServiceManage/></PrivateAuthRoute>}/>
           <Route exact path='/admin/customers' element={<PrivateAuthRoute roles={[1, 2,3]}><ListOfCustomer/></PrivateAuthRoute>}/>
           <Route exact path='/admin/add-customer' element={<PrivateAuthRoute roles={[1, 2,3]}><AddCustomer/></PrivateAuthRoute>}/>
+          <Route exact path='/admin/new-order' element={<PrivateAuthRoute roles={[1, 2,3]}><NewOrder/></PrivateAuthRoute>}/>
           <Route exact path='/admin/orders' element={<PrivateAuthRoute roles={[1, 2,3]}><Orders/></PrivateAuthRoute>}/>
         </Routes>
         <Footer/>

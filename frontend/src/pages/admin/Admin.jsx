@@ -1,17 +1,15 @@
-import React from 'react'
-import AdminMenu from '../../components/Admin/AdminMenu/AdminMenu'
-import { Stack } from '@mui/material'
-import AdminComponent from '../../components/Admin/AdminCompnent'
+import React from 'react';
+import { Stack } from '@mui/material';
+import AdminMenu from '../../components/Admin/AdminMenu/AdminMenu';
+import AdminComponent from '../../components/Admin/AdminCompnent'; // Assuming this is correctly imported
 
 const Admin = () => {
   return (
-    <Stack direction='row' spacing={{xs:2, sm: 6, md:10, lg:14}} sx={{
-      bgcolor:'#bbbcbd'
-    }}>
-    <AdminMenu/>
-    <AdminComponent/>
+    <Stack direction='row' sx={{ bgcolor: '#bbbcbd', p: 2 }}>
+      <AdminMenu />
+      <AdminComponent />
     </Stack>
-  )
-}
+  );
+};
 
-export default Admin
+export default Admin;

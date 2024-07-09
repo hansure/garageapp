@@ -1,7 +1,9 @@
-import React, { useState, useRef } from 'react';
-import { IconButton, Drawer, List, ListItem, ListItemIcon, ListItemText, CssBaseline, Box, Button, Divider, Stack, Typography  } from '@mui/material';
+import React, { useState } from 'react';
+import { IconButton, Drawer, List, ListItem, ListItemIcon, ListItemText, Box, Stack, Typography } from '@mui/material';
 import { Menu as MenuIcon, Dashboard as DashboardIcon, Receipt as OrdersIcon, NoteAdd as NewOrderIcon, PersonAdd as AddEmployeeIcon, Group as EmployeesIcon, PersonAdd as AddCustomerIcon, People as CustomersIcon, RoomService as ServicesIcon } from '@mui/icons-material';
-import { Link } from 'react-router-dom'; // If using React Router, adjust accordingly
+import { Link } from 'react-router-dom';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const links = [
   { text: 'Dashboard', icon: <DashboardIcon />, path: '/admin/dashboard' },
@@ -16,54 +18,57 @@ const links = [
 
 const AdminMenu = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const windowSize = useRef([window.innerWidth, window.innerHeight]);
-  console.log(windowSize.current[0])
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
-  return (
-    windowSize.current[0] > 560 ? (<Stack sx={{
-      bgcolor: '#ddecf0',
-      width: "25%"
-    }}>
-      <Box sx={{
-        bgcolor:'#1d1f1d',
-        p:'8px',
-        color:'#ffffff'
-      }}>
-        <Typography variant='h5'>ADMIN MENU</Typography>
-      </Box>
-      <List>
-          {links.map((link, index) => (
-            <ListItem button key={index} component={Link} to={link.path} onClick={toggleDrawer}>
-              <ListItemIcon>{link.icon}</ListItemIcon>
-              <ListItemText primary={link.text} />
-            </ListItem>
-          ))}
-        </List>
-    </Stack>):(
-          <div>
-          <IconButton edge="start" color="inherit" onClick={toggleDrawer} sx={{ mr: 2 }}>
-            <MenuIcon />
-          </IconButton>
 
-      <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer}>
+  return (
+    isSmallScreen ? (
+      <div>
+        <IconButton edge="start" color="inherit" onClick={toggleDrawer} sx={{ mr: 2 }}>
+          <MenuIcon />
+        </IconButton>
+
+        <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer}>
+          <List>
+            {links.map((link, index) => (
+              <ListItem button key={index} component={Link} to={link.path} onClick={toggleDrawer}>
+                <ListItemIcon>{link.icon}</ListItemIcon>
+                <ListItemText primary={link.text} />
+              </ListItem>
+            ))}
+          </List>
+        </Drawer>
+      </div>
+    ) : (
+      <Stack sx={{
+        bgcolor: '#ddecf0',
+        width: "25%"
+      }}>
+        <Box sx={{
+          bgcolor: '#1d1f1d',
+          p: '8px',
+          color: '#ffffff'
+        }}>
+          <Typography variant='h5'>ADMIN MENU</Typography>
+        </Box>
         <List>
           {links.map((link, index) => (
-            <ListItem button key={index} component={Link} to={link.path} onClick={toggleDrawer}>
+            <ListItem button key={index} component={Link} to={link.path}>
               <ListItemIcon>{link.icon}</ListItemIcon>
               <ListItemText primary={link.text} />
             </ListItem>
           ))}
         </List>
-      </Drawer>
-    </div>
+      </Stack>
     )
-  )
-}
+  );
+};
 
-export default AdminMenu
+export default AdminMenu;
 
 // import React, { useState } from 'react';
 // import { IconButton, Drawer, List, ListItem, ListItemIcon, ListItemText, CssBaseline } from '@mui/material';

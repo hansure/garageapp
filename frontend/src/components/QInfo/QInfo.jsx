@@ -1,6 +1,6 @@
-import { Box, Grid, Typography, Stack , Container} from '@mui/material'
-import React from 'react'
-import millage from '../../assets/images/millage.jpg'
+import { Box, Grid, Typography, Stack, Container } from '@mui/material';
+import React from 'react';
+import millage from '../../assets/images/millage.jpg';
 
 const QInfo = () => {
   return (
@@ -10,45 +10,49 @@ const QInfo = () => {
           theme.palette.mode === "light"
             ? theme.palette.grey[200]
             : theme.palette.grey[800],
-        p: 6,
+        py: 6,
       }}
     >
-    <Container maxWidth="lg">
-    <Grid container spacing={5}>
-            <Grid item xs={12} sm={4} md={5} lg={6} sx={{ 
-            bgcolor: "#ab0909" 
-            }}>
-            <Stack sx={{
-                justifyContent:'center',
-                alignItems:'center',
-            }}>
-                <Typography variant='h4' sx={{
-                color:'white',
-            }}>Quality Service And Customer Satisfaction !!</Typography>
-            <Typography sx={{
-                color:'white',
-            }}>
-                We utilize the most recent symptomatic gear to ensure your vehicle is fixed
-                or adjusted appropriately and in an opportune manner. We are an individual from Professional Auto Service,
-                a first class execution arrange, where free assistance offices share shared objectives of being world-class car administration focuses.
-            </Typography>
-            </Stack>
-        </Grid>
-        <Grid item xs={12} sm={4} md={5} lg={6} sx={{ bgcolor: "text.secondary" }}>
+      <Container maxWidth="lg">
+        <Grid container spacing={5} alignItems="center">
+          <Grid item xs={12} sm={6}>
             <Box
-            component="img"
-            sx={{
-                height: {xs:180, sm:200, md:350},
-                height:{xs:180, sm:200, md:350},
-                // maxHeight: { xs: 233, md: 167 },
-                // maxWidth: { xs: 350, md: 250 },
-            }}
-            src={millage}/> 
+              sx={{
+                backgroundColor: "#ab0909",
+                padding: 4,
+                borderRadius: 2,
+                textAlign: 'center',
+                color: 'white',
+              }}
+            >
+              <Typography variant="h4" gutterBottom>
+                Quality Service And Customer Satisfaction!!
+              </Typography>
+              <Typography>
+                We utilize the most recent diagnostic equipment to ensure your vehicle is fixed
+                or serviced properly and in a timely manner. We are a member of Professional Auto Service,
+                a top-tier performance network, where independent service facilities share common goals of being world-class automotive service centers.
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Box
+              component="img"
+              src={millage}
+              alt="Quality Service"
+              sx={{
+                width: '100%',
+                height: 'auto',
+                borderRadius: 2,
+                boxShadow: 3,
+              }}
+              loading="lazy"
+            />
+          </Grid>
         </Grid>
-    </Grid>
-    </Container>
+      </Container>
     </Box>
-  )
-}
+  );
+};
 
-export default QInfo
+export default QInfo;

@@ -1,164 +1,181 @@
-import React, {useState} from "react";
-import { TextField, MenuItem, Stack, Button, Select, Typography } from "@mui/material";
-import { Link } from "react-router-dom"
+import React, { useState } from "react";
+import {
+  TextField,
+  MenuItem,
+  Stack,
+  Button,
+  Select,
+  Typography,
+  Container,
+  Paper,
+  Box
+} from "@mui/material";
+import { Link } from "react-router-dom";
 import { createEmployeeService } from "../../../services/employee.service";
- 
+
 const AddEmployeeForm = () => {
-    const [employee_email, setEmail] = useState("")
-    const [employee_last_name, setLastName] = useState("")
-    const [employee_first_name, setFirstName] = useState("")
-    const [employee_phone, setPhoneNumber] = useState("")
-    const [active_employee, setActive_employee] = useState(1)
-    const [company_role_id, setCompany_role_id] = useState(1) 
-    const [employee_password, setPassword] = useState("")
+  const [employee, setEmployee] = useState({
+    email: "",
+    firstName: "",
+    lastName: "",
+    phone: "",
+    password: "",
+    active: 1,
+    role: 1,
+  });
 
-    //Errors
-    const [emailError, setEmailError] = useState(false);
-    const [firstNameRequired, setFirstNameRequired] = useState(false)
-    const [ passwordError, setPasswordError] = useState(false)
-    const [success, setSuccess] = useState(false)
-    const [ serverError, setServerError] = useState('')
- 
-    const handleSubmit = (event) => {
-        event.preventDefault()
+  const [errors, setErrors] = useState({
+    email: false,
+    firstName: false,
+    password: false,
+  });
 
-        let valid = true; //Flag
- 
-       // Email is required
-    if (!employee_email) {
-      setEmailError(true);
+  const [feedback, setFeedback] = useState({
+    success: false,
+    serverError: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setEmployee({ ...employee, [name]: value });
+    setErrors({ ...errors, [name]: false });
+    setFeedback({ ...feedback, success: false, serverError: "" });
+  };
+
+  const validate = () => {
+    let valid = true;
+    let tempErrors = { ...errors };
+
+    if (!employee.email || !/^\S+@\S+\.\S+$/.test(employee.email)) {
+      tempErrors.email = true;
       valid = false;
-    } else if (!employee_email.includes('@')) {
-      setEmailError(true);
-    } else {
-      const regex = /^\S+@\S+\.\S+$/;
-      if (!regex.test(employee_email)) {
-        setEmailError(true);
-        valid = false;
-      } else {
-        setEmailError(false);
-      }
-        }
-        if (!employee_password || employee_password.length < 8) {
-            setPasswordError(true)
-            valid = false
-        }else{
-            setPassword(false)
-        }
-        if(!employee_first_name){
-            setFirstNameRequired(true)
-            valid = false
-        }
-
-        if (!valid){
-            return;
-        }
-        const formData = {
-            employee_email,
-            employee_first_name,
-            employee_last_name,
-            employee_phone,
-            employee_password,
-            active_employee,
-            company_role_id
-        }
-        //Pass the form data to the service
-        const newEmployee = createEmployeeService(formData)
-        newEmployee.then((response) => response.json())
-        .then((data) => {
-            if(data.error){
-                setServerError(data.error)
-            } else {
-                setSuccess(true)
-                setServerError('')
-                setTimeout(() => {
-                    window.location = '/'
-                }, 2000)
-            }
-        }).catch((error) => {
-            const resMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-            setServerError(resMessage)
-        })
     }
-     
-    return ( 
-            <Stack sx={{
-            justifyContent:'center',
-            alignItems:'center',
-            maxWidth:'600px'
-        }}>
+
+    if (!employee.firstName) {
+      tempErrors.firstName = true;
+      valid = false;
+    }
+
+    if (!employee.password || employee.password.length < 8) {
+      tempErrors.password = true;
+      valid = false;
+    }
+
+    setErrors(tempErrors);
+    return valid;
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!validate()) return;
+
+    try {
+      const response = await createEmployeeService(employee);
+      const data = await response.json();
+
+      if (data.error) {
+        setFeedback({ ...feedback, serverError: data.error });
+      } else {
+        setFeedback({ success: true, serverError: "" });
+        setTimeout(() => {
+          window.location = "/";
+        }, 2000);
+      }
+    } catch (error) {
+      setFeedback({
+        ...feedback,
+        serverError:
+          (error.response && error.response.data && error.response.data.message) ||
+          error.message ||
+          error.toString(),
+      });
+    }
+  };
+
+  return (
+    <Container maxWidth="sm">
+      <Paper elevation={2} sx={{ padding: 1, marginTop: 1, marginBottom: 1 }}>
+        <Typography variant="h4" gutterBottom align="center">
+          Add New Employee
+        </Typography>
         <form autoComplete="off" onSubmit={handleSubmit}>
-            <h2>EmployeForm Form</h2>
-            {serverError && <Typography>{serverError}</Typography>}
-                <TextField 
-                    label="Email"
-                    onChange={e => setEmail(e.target.value)}
-                    required
-                    variant="outlined"
-                    color="secondary"
-                    type="email"
-                    sx={{mb: 3}}
-                    fullWidth
-                    value={employee_email}
-                    error={emailError}
-                 />
-                 <TextField 
-                    label="First Name"
-                    onChange={e => setFirstName(e.target.value)}
-                    required
-                    variant="outlined"
-                    color="secondary"
-                    type="text"
-                    sx={{mb: 3}}
-                    fullWidth
-                    value={employee_first_name}
-                    error={firstNameRequired}
-                 />
-                 <TextField 
-                    label="Last Name"
-                    onChange={e => setLastName(e.target.value)}
-                    required
-                    variant="outlined"
-                    color="secondary"
-                    type="text"
-                    sx={{mb: 3}}
-                    fullWidth
-                    value={employee_last_name}
-                 />
-                 <TextField 
-                    label="Employee phone number"
-                    onChange={e => setPhoneNumber(e.target.value)}
-                    required
-                    variant="outlined"
-                    color="secondary"
-                    type="text"
-                    sx={{mb: 3}}
-                    fullWidth
-                    value={employee_phone}
-                 />
-                <Select name="employee_role" value={company_role_id} onChange={event => setCompany_role_id(event.target.value)} fullWidth sx={{mb: 3}} required>
-                        <MenuItem value={1} defaultValue>Employee</MenuItem>
-                        <MenuItem value={2}>Manager</MenuItem>
-                        <MenuItem value={3}>Admin</MenuItem>
-                </Select>
-                 <TextField 
-                    label="Password"
-                    onChange={e => setPassword(e.target.value)}
-                    required
-                    variant="outlined"
-                    color="secondary"
-                    type="password"
-                    value={employee_password}
-                    error={passwordError}
-                    fullWidth
-                    sx={{mb: 3}}
-                 />
-                 <Button variant="outlined" color="secondary" type="submit">EmployeeForm</Button>
-                 {success && <Typography>{success}</Typography>}
+          {feedback.serverError && (
+            <Typography color="error" align="center" gutterBottom>
+              {feedback.serverError}
+            </Typography>
+          )}
+          <Stack spacing={3}>
+            <TextField
+              label="Email"
+              name="email"
+              value={employee.email}
+              onChange={handleChange}
+              error={errors.email}
+              helperText={errors.email ? "Enter a valid email" : ""}
+              fullWidth
+              variant="outlined"
+            />
+            <TextField
+              label="First Name"
+              name="firstName"
+              value={employee.firstName}
+              onChange={handleChange}
+              error={errors.firstName}
+              helperText={errors.firstName ? "First name is required" : ""}
+              fullWidth
+              variant="outlined"
+            />
+            <TextField
+              label="Last Name"
+              name="lastName"
+              value={employee.lastName}
+              onChange={handleChange}
+              fullWidth
+              variant="outlined"
+            />
+            <TextField
+              label="Phone Number"
+              name="phone"
+              value={employee.phone}
+              onChange={handleChange}
+              fullWidth
+              variant="outlined"
+            />
+            <Select
+              name="role"
+              value={employee.role}
+              onChange={handleChange}
+              fullWidth
+              variant="outlined"
+            >
+              <MenuItem value={1}>Employee</MenuItem>
+              <MenuItem value={2}>Manager</MenuItem>
+              <MenuItem value={3}>Admin</MenuItem>
+            </Select>
+            <TextField
+              label="Password"
+              name="password"
+              value={employee.password}
+              onChange={handleChange}
+              error={errors.password}
+              helperText={errors.password ? "Password must be at least 8 characters" : ""}
+              type="password"
+              fullWidth
+              variant="outlined"
+            />
+            <Button variant="contained" color="primary" type="submit" fullWidth>
+              Add Employee
+            </Button>
+            {feedback.success && (
+              <Typography color="success" align="center">
+                Employee added successfully!
+              </Typography>
+            )}
+          </Stack>
         </form>
-        <small>Need an account? <Link to="/">Add Employee</Link></small>
-        </Stack>
-     );
-}
- 
+      </Paper>
+    </Container>
+  );
+};
+
 export default AddEmployeeForm;

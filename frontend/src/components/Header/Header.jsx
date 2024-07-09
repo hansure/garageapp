@@ -17,7 +17,7 @@ import Button from '@mui/material/Button';
 import logo from '../../assets/images/Logo.jpg'
 import { Link } from "react-router-dom";
 import { useAuth } from "../../Contexts/AuthContext"
-import {logOutEmployeeService} from '../../services/login.service'
+import { logOutEmployeeService } from '../../services/login.service'
 
 const drawerWidth = 240;
 const navItems = [
@@ -31,48 +31,40 @@ const navItems = [
 function Header(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  console.log(useAuth())
-  const {isLogged, setIsLogged, employee} = useAuth()
+  const { isLogged, setIsLogged, employee } = useAuth();
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
-  const logOut = () =>{
-    logOutEmployeeService()
-    setIsLogged(false)
-  }
+  const logOut = () => {
+    logOutEmployeeService();
+    setIsLogged(false);
+  };
+
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      {/* <img src="logo.jpg" alt="logo"/> */}
       <Divider />
       <List>
-        {navItems && navItems.map((item) => (
+        {navItems.map((item) => (
           <ListItem key={item.text} disablePadding>
             <ListItemButton component={Link} to={item.path} sx={{ textAlign: 'center' }}>
               <ListItemText primary={item.text} />
             </ListItemButton>
           </ListItem>
         ))}
-          <Divider/>
-          <Button color="primary" variant="contained" sx={{
-            marginTop:'3px'
-          }}>
-            {
-              isLogged ? (<Link to="/" onClick = {logOut} style={{
-              color:'white',
-              textDecoration:'none'
-            }}>
+        <Divider />
+        <Button color="primary" variant="contained" sx={{ marginTop: '3px' }}>
+          {isLogged ? (
+            <Link to="/" onClick={logOut} style={{ color: 'white', textDecoration: 'none' }}>
               Logout
-            </Link>) : (
-            <Link to="/login" style={{
-              color:'white',
-              textDecoration:'none'
-            }}>
+            </Link>
+          ) : (
+            <Link to="/login" style={{ color: 'white', textDecoration: 'none' }}>
               Login
-            </Link>)
-            }
-          </Button>
+            </Link>
+          )}
+        </Button>
       </List>
     </Box>
   );
@@ -80,9 +72,9 @@ function Header(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', overflowX: 'hidden', width: '100%' }}>
       <CssBaseline />
-      <AppBar component="nav" position="sticky" style={{backgroundColor:'white', color:'black'}} >
+      <AppBar component="nav" position="sticky" style={{ backgroundColor: 'white', color: 'black' }} sx={{ width: '100%' }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -93,11 +85,8 @@ function Header(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Box
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-          >
-            <img src={logo} alt="logo"/>
+          <Box component="div" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
+            <img src={logo} alt="logo" />
           </Box>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
@@ -106,26 +95,18 @@ function Header(props) {
               </Button>
             ))}
           </Box>
-          <Divider orientation="vertical"/>
-          <Button color="primary" variant="contained" sx={{
-            marginLeft:'5px',
-            display:{xs:'none', md:'block'}
-          }}>
-            {
-              isLogged ? (<Link to="/" onClick = {logOut} style={{
-              color:'white',
-              textDecoration:'none'
-            }}>
-              Logout
-            </Link>) : (
-            <Link to="/login" style={{
-              color:'white',
-              textDecoration:'none'
-            }}>
-              Login
-            </Link>)
-            }
-        </Button>
+          <Divider orientation="vertical" flexItem />
+          <Button color="primary" variant="contained" sx={{ marginLeft: '5px', display: { xs: 'none', md: 'block' } }}>
+            {isLogged ? (
+              <Link to="/" onClick={logOut} style={{ color: 'white', textDecoration: 'none' }}>
+                Logout
+              </Link>
+            ) : (
+              <Link to="/login" style={{ color: 'white', textDecoration: 'none' }}>
+                Login
+              </Link>
+            )}
+          </Button>
         </Toolbar>
       </AppBar>
       <nav>
@@ -145,11 +126,15 @@ function Header(props) {
           {drawer}
         </Drawer>
       </nav>
-      <Box component="main" sx={{ p: 0.2 }}>
+      <Box component="main" sx={{ p: 0.2, width: '100%' }}>
         <Toolbar />
       </Box>
     </Box>
   );
 }
+
+Header.propTypes = {
+  window: PropTypes.func,
+};
 
 export default Header;
