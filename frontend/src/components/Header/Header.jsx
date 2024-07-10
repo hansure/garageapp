@@ -25,7 +25,7 @@ const navItems = [
   { text: "About Us", path: "/about-us" },
   { text: "Services", path: "/Services" },
   { text: "Contact Us", path: "/contact-us" },
-  { text: "Admin", path: "/admin/dashboard" },
+  // { text: "Admin", path: "/admin/dashboard" },
 ];
 
 function Header(props) {
@@ -95,6 +95,13 @@ function Header(props) {
               </Button>
             ))}
           </Box>
+          <div>
+            {isLogged ? (
+              <Button key='admin' href="/admin/dashboard" sx={{ color: '#000' }}>
+                Admin
+              </Button>
+            ):("")}
+            </div>
           <Divider orientation="vertical" flexItem />
           <Button color="primary" variant="contained" sx={{ marginLeft: '5px', display: { xs: 'none', md: 'block' } }}>
             {isLogged ? (

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Box, Typography, Button, ImageList, ImageListItem, Grid, Container } from '@mui/material';
+import Engine from '../../assets/images/Engine.png'
+import Turbocharger from '../../assets/images/Turbocharger.png'
 
 const Experience = () => {
   return (
@@ -18,14 +20,14 @@ const Experience = () => {
             <ImageList cols={2} rowHeight={170}>
               <ImageListItem>
                 <img
-                  src='https://media.geeksforgeeks.org/wp-content/uploads/20220221132017/download.png'
+                  src={Engine}
                   alt='Image 1'
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </ImageListItem>
               <ImageListItem>
                 <img
-                  src='https://media.geeksforgeeks.org/wp-content/uploads/20220221132017/download.png'
+                  src= {Turbocharger}
                   alt='Image 2'
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />

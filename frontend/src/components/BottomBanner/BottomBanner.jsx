@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactPlayer from 'react-player';
-import Banner from '../../assets/images/banner/banner.jpg';
+import Ba from '../../assets/images/banner/Ba.png';
 import { Box, Container, Stack, Typography } from '@mui/material';
 
 const BottomBanner = () => {
   return (
     <Box
       sx={{
-        backgroundImage: `url(${Banner})`,
+        backgroundImage: `url(${Ba})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         minHeight: '35vh', // Ensures minimum height for the banner

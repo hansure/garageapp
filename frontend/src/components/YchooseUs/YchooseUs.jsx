@@ -43,16 +43,16 @@ const YchooseUs = () => {
             </Typography>
             <Stack spacing={2}>
               <Button component="label" variant="text" startIcon={<CloudUploadIcon />}>
-                Certified Expert Mechanics
+                Certified Expert Mechanics <hr/>
               </Button>
               <Button component="label" variant="text" startIcon={<CloudUploadIcon />}>
-                Quality Auto Parts
+                Quality Auto Parts <hr/>       
               </Button>
               <Button component="label" variant="text" startIcon={<CloudUploadIcon />}>
-                Affordable Prices
+                Affordable Prices <hr/>
               </Button>
               <Button component="label" variant="text" startIcon={<CloudUploadIcon />}>
-                Fast and Reliable Service
+                Fast and Reliable Service <hr/>
               </Button>
             </Stack>
           </Grid>

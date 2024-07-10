@@ -63,7 +63,7 @@ const LoginForm = () => {
                 }
                 console.log(location)
                 if(location.pathname === '/login'){
-                    navigate('/')
+                    navigate('/admin/dashboard')
                 }else{
                     window.location.reload()
                 }

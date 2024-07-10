@@ -1,5 +1,7 @@
 import React from 'react'
 import { Stack, Box, Typography, Button, ImageList, ImageListItem, Grid, Container} from '@mui/material'
+import Oil from '../../assets/images/Oil.png'
+import Tire from '../../assets/images/Tire.png'
 
 const Skill = () => {
   return (
@@ -29,11 +31,11 @@ const Skill = () => {
             <ImageList 
                     cols={3} rowHeight={170}>
                 <ImageListItem>
-                    <img src='https://media.geeksforgeeks.org/wp-content/uploads/20220221132017/download.png'/>
+                    <img src={Oil} />
                 </ImageListItem>
                 
                 <ImageListItem>
-                    <img src='https://media.geeksforgeeks.org/wp-content/uploads/20220221132017/download.png'/>
+                    <img src={Tire} />
                 </ImageListItem>
             </ImageList>
         </Grid>
