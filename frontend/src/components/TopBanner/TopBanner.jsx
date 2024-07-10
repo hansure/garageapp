@@ -45,7 +45,7 @@ export default function TopBanner() {
         }}>
           To Next Level
         </Typography>
-        <ReactPlayer width='100%' height='100%' url="https://www.youtube.com/watch?v=SqcY0GlETPk&t=27s" controls={true} style={{ maxWidth: '300px', aspectRatio: '16/9' }} />
+        <ReactPlayer width='100%' height='100%' url="https://www.youtube.com/watch?v=fPjOWekzeGI&t=66s&pp=ygUUYWJvdXQgdmVoaWNsZSBnYXJhZ2U%3D" controls={true} style={{ maxWidth: '300px', aspectRatio: '16/9' }} />
       </Stack>
     </div>
   );
