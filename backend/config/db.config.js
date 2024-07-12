@@ -3,10 +3,10 @@ import mysql from 'mysql2/promise'
 
 // Create connection parameters to connect to the database
 const connectionParams = {
-        host: process.env.DB_HOST || 'sql210.infinityfree.com',
-        user: process.env.DB_USER || 'if0_36786230',
-        password: process.env.DB_PASSWORD || 'szmUItWUaz',
-        database: process.env.DB_NAME || 'if0_36786230_garage',
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
         waitForConnections: true,
         connectionLimit: 10,
         queueLimit: 0
